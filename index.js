@@ -3,31 +3,36 @@ class ProductMannager {
     this.products = [];
   }
 
-  addProduct = (producto, precio, imgPath, intcode, stock) => {
+  addProduct = (producto, precio, imgPath, productId, stock) => {
     const product = {
       id: 0,
       title: producto,
       price: precio,
       thumbnail: imgPath,
-      code: intcode,
+      code: productId,
       stock: stock,
     };
-    if (this.products.length === 0) {
-      product.id = 1;
-    } else {
-      product.id = this.products[this.products.length - 1].id + 1;
-    }
 
-    this.products.push(product);
+    if (this.products.findIndex((product) => product.code === productId)) {
+      if (this.products.length === 0) {
+        product.id = 1;
+      } else {
+        product.id = this.products[this.products.length - 1].id + 1;
+      }
+
+      this.products.push(product);
+    } else {
+      console.log(`Duplicated Code "${productId}"`);
+    }
   };
   getProducts = () => {
     return this.products;
   };
-  getProductById = (pos) => {
-    const res = this.products.filter((product) => product.id === pos);
+  getProductById = (id) => {
+    const res = this.products.filter((product) => product.id === id);
     // console.log(res);
     if (res.length === 0) {
-      return "Not Found";
+      return '"Product not Found"';
     } else {
       return res;
     }
@@ -70,6 +75,9 @@ function addProducts() {
     "md-Espinillo",
     10
   );
+
+  PM.addProduct("Madera de Pino", 200, "./img/MaderaPino.jpg", `md-Pino`, 20); //Duplicado
+
   PM.addProduct(
     "Carbon de Quebracho Blanco",
     350,
