@@ -1,4 +1,7 @@
+const fs = require("fs");
 class ProductMannager {
+  #path = "./data";
+  #data;
   constructor() {
     this.products = [];
   }
@@ -19,11 +22,15 @@ class ProductMannager {
       } else {
         product.id = this.products[this.products.length - 1].id + 1;
       }
-
       this.products.push(product);
-    } else {
-      console.log(`Duplicated Code "${productId}"`);
+      this.#data = JSON.stringify(this.products);
+      fs.promises
+        .writeFile(`${this.#path}/stock.dat`, this.#data, "utf-8")
+        .then(() => console.log("Fichero actualizado}"))
+        .catch((err) => console.log(err));
+      return;
     }
+    return console.log(`Duplicated Code "${productId}"`);
   };
   getProducts = () => {
     return this.products;
@@ -33,9 +40,8 @@ class ProductMannager {
     // console.log(res);
     if (res.length === 0) {
       return '"Product not Found"';
-    } else {
-      return res;
     }
+    return res;
   };
 }
 const PM = new ProductMannager();
