@@ -1,0 +1,22 @@
+<div>Listo RealTime Handlebars</div>
+<form >
+<label >Producto</label>
+<input name="product">
+<label >Descripcion</label>
+<input name="description">
+<label >Codigo Interno</label>
+<input name="code">
+<label >Categoria</label>
+<input name="category">
+<label >Precio</label>
+<input name="price">
+<label >Stock</label>
+<input name="stock">
+<input type="button" name="button" value="Enviar" onclick="sendForm(this.form)" >
+</form>
+<div>
+    <ul id= "prodList">
+    </ul>
+</div>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/virtual/js/realtimeProducts.js"></script>

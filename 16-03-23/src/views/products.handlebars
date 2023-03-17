@@ -1,0 +1,61 @@
+<h2><strng>Listo PRODUCTS Handlebars</strng></h2>
+<hr>
+<div>
+{{#each prodList.docs}}
+{{!-- <div class="Product">
+    <a href="/pId={{this.code}}" >Producto : {{this.title}}</a>
+    <p> Categoria : {{this.category}}</p>
+    <p> Descripcion : {{this.description}}</p>
+    <p> Precio : $ {{this.price}}</p>
+    <p> Disponible : {{this.stock}} unidades</p>
+    <input Id={{this.code}} type="button" name="button" value="Enviar" onclick="ProductPUT(this.form)" >
+    <hr>
+</div> --}}
+<form action= "/api/cart/1/products/{{this.code}}" method="POST">
+<input type="hidden" name="prodId" value="{{this._id}}">
+<input  type="hidden" name="code"value="{{this.code}}">
+
+<label >Producto</label>
+<input  type="text" name="title" value="{{this.title}}" readonly>
+<label >Descripcion</label>
+<input  type="text" name="description" value="{{this.description}}" readonly>
+<label >Categoria</label>
+<input  type="text" name="category" value="{{this.category}}" readonly>
+<label >Precio</label>
+<input  type="text" name="price" value="{{this.price}}" readonly>
+<label >Stock</label>
+<input  type="text" name="stock" value="{{this.stock}}" readonly>
+
+{{!-- <input type="button" name="button" value="Enviar" onclick="sendForm(this.form)" > --}}
+
+<input type="submit" value="CartAdd">
+</form>
+<br>
+<hr>
+{{/each}}
+{{#if prodList.hasPrevPage}}
+<a href="/api/products?page={{prodList.prevPage}}"><button>Pagina Anterior</button></a>
+{{/if}}
+{{#if prodList.hasNextPage}}
+<a href="/api/products?page={{prodList.nextPage}}"><button>Siguiente Pagina</button></a>
+{{/if}}
+</div>
+{{!-- <div>
+{{#each prodList.docs}}
+<div class="Product">
+    <p> Producto : {{this.title}}</p>
+    <p> Categoria : {{this.category}}</p>
+    <p> Descripcion : {{this.description}}</p>
+    <p> Precio : $ {{this.price}}</p>
+    <p> Disponible : {{this.stock}} unidades</p>
+    <hr>
+</div>
+{{/each}}
+{{#if prodList.hasPrevPage}}
+<a href="/api/products?page={{prodList.prevPage}}"><button>Pagina Anterior</button></a>
+{{/if}}
+{{#if prodList.hasNextPage}}
+<a href="/api/products?page={{prodList.nextPage}}"><button>Siguiente Pagina</button></a>
+{{/if}}
+</div> --}}
+<script src="/virtual/js/products.js"></script>
